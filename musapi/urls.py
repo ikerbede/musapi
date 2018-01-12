@@ -16,13 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from mus import views
+from mus import ws
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('users/', views.users, name='users'),
-    path('messages/', views.users, name='messages'),
-    path('teams/', views.users, name='teams'),
-    path('rounds/', views.users, name='rounds'),
-    path('scores/', views.users, name='scores'),
+    path('users/', ws.users.users, name='users'),
+    path('teams/', ws.teams.teams, name='teams'),
+    path('rounds/', ws.rounds.rounds, name='rounds'),
+    path('hands/', ws.hands.hands, name='hands'),
 ]

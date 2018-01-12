@@ -1,16 +1,17 @@
-from kolore import Kolore
-
 from random import choice
+import json
 
-class Esku():
+from color import Color
+
+class Hand():
   def __init__(self):
     self.cards = []
   
   def addCard(self, card):
-    if (card not in Kolore().cards):
-      raise ValueError("Unexpected card!")
+    if (card not in Color().cards):
+      raise ValueError('Unexpected card!')
     elif (len(self.cards) == 4):
-      raise IndexError("Eskua is full already!")
+      raise IndexError('The Hand is full already!')
     else:
       self.cards.append(card)
       self.cards.sort()
@@ -31,7 +32,7 @@ class Esku():
           elif (nbOccurences == 4):
             points = 3
           else:
-            raise ValueError("Unexpected number of occurences: " + nbOccurences)
+            raise ValueError('Unexpected number of occurences: ' + nbOccurences)
           vap.append([value, points])
     
     return vap
@@ -58,3 +59,11 @@ class Esku():
   def removeCards(self, cards):
     for card in cards:
       self.cards.remove(card)
+  
+  def toJson(self):
+    data = {
+      'cards': self.cards,
+      'pairs': self.getPairValuesAndPoints(),
+      'game': self.getGameValueAndPoints()
+    }
+    return json.dumps(data)
